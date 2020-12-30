@@ -15,6 +15,10 @@ public class Example {
         System.out.println(user.getUserInfo());
 
         // Userクラスをパースする
+        SampleJavaParser();
+    }
+
+    private static void SampleJavaParser() {
         Path source = Paths.get("src/main/java/example/User.java");
         try {
             CompilationUnit unit = JavaParser.parse(source);
