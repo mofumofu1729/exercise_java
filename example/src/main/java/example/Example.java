@@ -2,7 +2,7 @@ package example;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
-import javassist.ClassPool;
+import javassist.*;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -16,6 +16,20 @@ public class Example {
 
         // Userクラスをパースする
         SampleJavaParser();
+
+        // Userクラスを弄る
+        // 参照: https://qiita.com/hiroki19990625/items/f51dda992bd0bb90b3ac
+        try {
+            ClassPool pool = ClassPool.getDefault();
+
+            CtClass ctc = pool.get("example.User");
+
+            CtField field = new CtField(CtClass.intType, "money", ctc);
+        } catch(NotFoundException e) {
+            e.printStackTrace();
+        } catch (CannotCompileException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void SampleJavaParser() {
